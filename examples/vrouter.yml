@@ -1,0 +1,20 @@
+metrics:
+  - name: vrouter_state
+    type: Enum
+    kwargs: {states: [Functional, Non-Functional]}
+    uve_type: vrouter
+    uve_module: NodeStatus
+    json_path: process_status[0].state
+    append_field_name: false
+
+  - name: vrouter_drop_stats
+    type: Gauge
+    uve_type: vrouter
+    uve_module: VrouterStatsAgent
+    json_path: vhost_drop_stats.*
+
+  - name: vrouter_flow_rate
+    type: Gauge
+    uve_type: vrouter
+    uve_module: VrouterStatsAgent
+    json_path: flow_rate.*

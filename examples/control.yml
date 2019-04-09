@@ -1,0 +1,20 @@
+metrics:
+  - name: control_state
+    type: Enum
+    kwargs: {states: [Functional, Non-Functional]}
+    uve_type: control-node
+    uve_module: NodeStatus
+    json_path: process_status[0].state
+    append_field_name: false
+
+  - name: control
+    type: Gauge
+    uve_type: control-node
+    uve_module: BgpRouterState
+    json_path: num_up_xmpp_peer,num_xmpp_peer,num_up_bgp_peer,num_bgp_peer
+
+  - name: bgp_peer
+    type: Gauge
+    uve_type: bgp-peer
+    uve_module: BgpPeerInfoData
+    json_path: flap_info.flap_count
