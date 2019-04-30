@@ -135,7 +135,7 @@ class Config:
         def __init__(self):
             self.config = confuse.LazyConfig("tungsten-prometheus-exporter", __name__)
 
-        def _render(self):
+        def render(self):
             try:
                 self.rendered_config = self.config.get(_global_template)
             except confuse.ConfigError as e:
@@ -146,9 +146,14 @@ class Config:
         if not Config.instance:
             Config.instance = Config.__Config()
 
+    def set(self, args):
+        self.instance.config.add(args)
+
     def set_file(self, filename):
         self.instance.config.set_file(filename)
-        self.instance._render()
+
+    def render(self):
+        self.instance.render()
 
     def __getattr__(self, name):
         if not hasattr(self.instance, "rendered_config"):

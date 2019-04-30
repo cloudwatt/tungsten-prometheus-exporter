@@ -28,9 +28,17 @@ def main():
         type=filename,
         default=os.environ.get("TUNGSTEN_PROMETHEUS_EXPORTER_CONFIG"),
     )
+    parser.add_argument(
+        "--host",
+        type=str,
+        default=os.environ.get("TUNGSTEN_PROMETHEUS_EXPORTER_ANALYTICS_HOST"),
+    )
     args = parser.parse_args()
     if args.config:
         Config().set_file(args.config)
+    if args.host:
+        Config().set({'analytics': {'host': args.host}})
+    Config().render()
     start_http_server(port=Config().prometheus.port)
     logging_format = '%(asctime)-15s:%(levelname)s:%(module)s:%(message)s'
     logging.basicConfig(level=Config().logging.level, format=logging_format)

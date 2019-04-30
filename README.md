@@ -21,6 +21,12 @@ Configuration is provided as a yaml file.
 
 You should at least configure `analytics.host` and `metrics`.
 
+Analytics host can be configured with the `--host` option or
+`TUNGSTEN_PROMETHEUS_EXPORTER_ANALYTICS_HOST` env variable.
+
+Configuration file location can be configured with the `--config` option or
+`TUNGSTEN_PROMETHEUS_EXPORTER_CONFIG` env variable.
+
 Other configuration options are described below with default values for
 reference.
 
