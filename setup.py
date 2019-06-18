@@ -13,10 +13,10 @@ setup(
     packages=find_packages(),
     install_requires=[
         "requests",
-        "prometheus_client~=0.6",
-        "jsonpath-rw~=1.4",
+        "prometheus_client~=0.7.0",
+        "jsonpath-rw~=1.4.0",
         "confuse",
-        "gevent~=1.4",
+        "gevent~=1.4.0",
     ],
     scripts=[],
     license="MIT",
