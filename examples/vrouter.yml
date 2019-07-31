@@ -1,4 +1,5 @@
 metrics:
+  # The state of the vrouter agents
   - name: vrouter_state
     type: Enum
     kwargs: {states: [Functional, Non-Functional]}
@@ -7,12 +8,16 @@ metrics:
     json_path: process_status[0].state
     append_field_name: false
 
+  # Drop stats of agents
+  # https://www.juniper.net/documentation/en_US/contrail3.2/topics/task/configuration/vrouter-cli-utilities-vnc.html#jd0e550
   - name: vrouter_drop_stats
     type: Gauge
     uve_type: vrouter
     uve_module: VrouterStatsAgent
     json_path: vhost_drop_stats.*
 
+  # Flow rate of vrouters
+  # Reports the number of active/deleted/hold flows
   - name: vrouter_flow_rate
     type: Gauge
     uve_type: vrouter

@@ -1,4 +1,5 @@
 metrics:
+  # The state of BGP controllers
   - name: control_state
     type: Enum
     kwargs: {states: [Functional, Non-Functional]}
@@ -7,12 +8,17 @@ metrics:
     json_path: process_status[0].state
     append_field_name: false
 
+  # State of connections of the BGP controllers
+  # - num_bgp_peer, num_up_bgp_peer: connections with other controllers or gateway
+  # - num_xmpp_peer, num_up_xmpp_peer: connections with vrouter agents
   - name: control
     type: Gauge
     uve_type: control-node
     uve_module: BgpRouterState
     json_path: num_up_xmpp_peer,num_xmpp_peer,num_up_bgp_peer,num_bgp_peer
 
+  # Flap count of the BGP connections
+  # Indicates if the BGP connections are stable or not
   - name: bgp_peer
     type: Gauge
     uve_type: bgp-peer
