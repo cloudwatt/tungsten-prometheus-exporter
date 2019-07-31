@@ -39,6 +39,7 @@ class Scraper(Greenlet):
             r = self.pool.apply(self._request)
             scrape_pool_size.dec()
             if isinstance(r, Response):
+                r.raise_for_status()
                 for m in self.metrics:
                     m.update(r.json())
             elif isinstance(r, StopScrape):

@@ -2,12 +2,15 @@ from gevent import monkey
 
 monkey.patch_all()
 
+import sys
 import os.path
 import logging
 import argparse
 
 import confuse
 from prometheus_client import start_http_server
+
+from keystoneauth1.loading import cli as kcli
 
 from tungsten_prometheus_exporter.metric import MetricCollection
 from tungsten_prometheus_exporter.config import Config
@@ -33,7 +36,12 @@ def main():
         type=str,
         default=os.environ.get("TUNGSTEN_PROMETHEUS_EXPORTER_ANALYTICS_HOST"),
     )
+    argv = sys.argv[1:]
+    kcli.register_argparse_arguments(parser, argv, default=None)
     args = parser.parse_args()
+    auth = None
+    if args.os_auth_type is not None:
+        auth = kcli.load_from_argparse_arguments(args)
     if args.config:
         Config().set_file(args.config)
     if args.host:
@@ -42,7 +50,7 @@ def main():
     start_http_server(port=Config().prometheus.port)
     logging_format = '%(asctime)-15s:%(levelname)s:%(module)s:%(message)s'
     logging.basicConfig(level=Config().logging.level, format=logging_format)
-    collection = MetricCollection()
+    collection = MetricCollection(auth=auth)
     collection.scrape()
 
 

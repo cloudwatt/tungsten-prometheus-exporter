@@ -17,6 +17,7 @@ setup(
         "jsonpath-rw~=1.4.0",
         "confuse",
         "gevent~=1.4.0",
+        "keystoneauth1~=3.15.0",
     ],
     scripts=[],
     license="MIT",

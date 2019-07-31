@@ -14,6 +14,22 @@ $ TUNGSTEN_PROMETHEUS_EXPORTER=/path/to/config.yml tungsten-prometheus-exporter
 
 Metrics are available on port `8080` by default.
 
+Authentication
+--------------
+
+If authentication is enabled on the analytics API you need to provide Openstack credentials.
+
+By default no authentication is made. Use the `--os-auth-type` to choose the
+desired authentication plugin (`v2password`, `v3password`).
+
+Depending on the selected auth plugin multiple options needs to be set on the
+command line or exported in environment variables (use `--help` to see them
+all). For example to use `v2password`:
+
+```bash
+$ tungsten-prometheus-exporter --config config.yaml --os-auth-type v2password --os-username admin --os-password development --os-auth-url http://localhost:35357/v2.0/ --os-tenant-name openstack
+```
+
 Configuration
 -------------
 
@@ -29,6 +45,7 @@ Configuration file location can be configured with the `--config` option or
 
 Other configuration options are described below with default values for
 reference.
+
 
 ### Section `analytics`
 

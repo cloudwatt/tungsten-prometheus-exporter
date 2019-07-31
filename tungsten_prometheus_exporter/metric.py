@@ -7,6 +7,8 @@ import requests
 from requests.packages.urllib3.util import Retry
 from requests.adapters import HTTPAdapter
 
+from keystoneauth1.session import Session
+
 from jsonpath_rw import parse, Fields
 from prometheus_client import Enum
 
@@ -198,11 +200,11 @@ class MetricCollection(UserList):
 
     For each uve_type a MetricTypeCollection class is created.
     """
-    def __init__(self):
+    def __init__(self, auth=None):
         super().__init__()
         self.scrapers = Group()
         self.scrape_pool = Pool(size=Config().scraper.pool_size)
-        self.session = requests.session()
+        self.session = Session(auth=auth)
         self.session.mount(
             "http://",
             HTTPAdapter(
