@@ -15,7 +15,7 @@ setup(
         "requests",
         "prometheus_client~=0.7.0",
         "jsonpath-rw~=1.4.0",
-        "confuse",
+        "confuse~=1.0.0",
         "gevent~=1.4.0",
         "keystoneauth1~=3.15.0",
     ],
