@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="tungsten-prometheus-exporter",
-    version="0.1.1",
+    version="0.1.2",
     description="Scrape TungstenFabric/OpenContrail analytics UVEs and provide prometheus endpoint",
     author="Jean-Philippe Braun",
     author_email="jean-philippe.braun@orange.com",
