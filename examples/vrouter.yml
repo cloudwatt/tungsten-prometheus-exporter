@@ -23,3 +23,10 @@ metrics:
     uve_type: vrouter
     uve_module: VrouterStatsAgent
     json_path: flow_rate.*
+
+  # Memory usage of vrouter agents
+  - name: vrouter_mem_info
+    type: Gauge
+    uve_type: vrouter
+    uve_module: VrouterStatsAgent
+    json_path: cpu_info.meminfo.*
